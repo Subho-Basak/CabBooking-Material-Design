@@ -1,0 +1,14 @@
+SMAP
+Faq_jsp.java
+JSP
+*S JSP
+*F
++ 0 Faq.jsp
+Views/Faq.jsp
++ 1 header.jspf
+Views/../WEB-INF/private/Layout/header.jspf
+*L
+5,20:49
+1#1,46:68
+24#0,242:113
+*E
