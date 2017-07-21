@@ -1,6 +1,7 @@
 package com.cb.db;
 
 import com.cb.model.Booking;
+import com.cb.model.Car;
 import com.cb.model.Fare;
 import com.cb.model.User;
 import java.io.Serializable;
@@ -15,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import java.util.logging.Level;
@@ -124,21 +124,41 @@ public class DAO implements Serializable, AutoCloseable {
         return isCreated;
     }
 
+   public User fetchLoginDetails(String userId) {
+        User user = new User();
+        user.setId(userId);
+        return fetchLoginDetails(user, true);
+    }
+    
     public User fetchLoginDetails(User user) {
+        return fetchLoginDetails(user, false);
+    }
+
+    private User fetchLoginDetails(User user, boolean authenticateUsingId) {
         //boolean isCreated = false;
 
         try {
             open();
 
-            if (user.getContact() != null) {
-                pstmt = db.prepareStatement(QueryStrings.Q_USR_INFO_PH);
-                pstmt.setString(1, user.getContact());
-            } else {
-                pstmt = db.prepareStatement(QueryStrings.Q_USR_INFO_EM);
-                pstmt.setString(1, user.getEmail());
-            }
+            if(!authenticateUsingId) {
+                if (user.getContact() != null) {
+                    pstmt = db.prepareStatement(QueryStrings.Q_USR_INFO_PH);
+                    pstmt.setString(1, user.getContact());
+                } else {
+                    pstmt = db.prepareStatement(QueryStrings.Q_USR_INFO_EM);
+                    pstmt.setString(1, user.getEmail());
+                }
 
-            pstmt.setString(2, user.getPassword());
+                pstmt.setString(2, user.getPassword());
+            } else {
+                if(user.getId() != null) {
+                    pstmt = db.prepareStatement(QueryStrings.Q_USR_INFO_ID);
+                    pstmt.setString(1, user.getId());
+                } else {
+                    releaseOtherResources();
+                    return null;
+                }
+            }
 
             if ((rs = pstmt.executeQuery()) != null) {
                 if (rs.next()) {
@@ -196,6 +216,39 @@ public class DAO implements Serializable, AutoCloseable {
         releaseOtherResources();
         return null;
     }
+
+    public List<Car> fetchCarsDetails() {
+        List<Car> carsDetails = new ArrayList<>();
+
+        try {
+            open();
+
+            pstmt = db.prepareStatement(QueryStrings.Q_CARS_INFO);
+
+            if ((rs = pstmt.executeQuery()) != null) {
+                Car car;
+                while (rs.next()) {
+                    car = new Car();
+                    car.setId(rs.getInt("car_id"));
+                    car.setCarType(rs.getString("car_type"));
+                    car.setCarModel(rs.getString("car_model"));
+                    car.setCarName(rs.getString("car_name"));
+                    car.setCarImageURI(rs.getString("car_image"));
+                    carsDetails.add(car);
+                }
+
+                releaseOtherResources();
+                return carsDetails;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        releaseOtherResources();
+        return null;
+    }
+    
     public List<Fare> fetchFareByCity(String cityName) {
         List<Fare> fareDetails = new ArrayList<>();
 
@@ -235,6 +288,10 @@ public class DAO implements Serializable, AutoCloseable {
     private void releaseOtherResources() {
         release(false, true, true);
     }
+    
+    public void release() {
+        release(true, true, true);
+    }
 
     private void release(boolean closeConnection, boolean closePreparedStatement, boolean closeResultSet) {
         release(closeConnection ? db : null, closePreparedStatement ? pstmt : null, closeResultSet ? rs : null);
@@ -269,10 +326,13 @@ public class DAO implements Serializable, AutoCloseable {
 
     /* =================================================== X =================================================== */
     public static boolean isConnectionOK() {
-        boolean isOK;
-        Connection conn = DBProvider.instance().getConnection();
-        isOK = conn != null;
-        new DAO().release(conn, null, null);
+        boolean isOK = false;
+        try {
+            isOK = DAO.instance().open() != null;
+            //DAO.instance().close();
+        } catch (Exception ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return isOK;
     }
 
@@ -282,12 +342,13 @@ public class DAO implements Serializable, AutoCloseable {
         System.out.println("connection closed...");
     }
 
-    public final void open() throws SQLException {
+    public final Connection open() throws SQLException {
         if (null == db) {
             db = DBProvider.instance().getConnection();
             db.setAutoCommit(false);
             System.out.println("connection opened...");
         }
+        return db;
     }
 
     public static DAO instance() {

@@ -74,10 +74,18 @@ public class UsrSessonController extends HttpServlet {
                         }
                         user.setPassword(passwd);
                         user = DAO.instance().fetchLoginDetails(user);
-                        
-                        if(user != null) {
+
+                        if (user != null) {
                             HttpSession session = request.getSession(true);
                             session.setAttribute("account", user);
+
+                            String remember = request.getParameter("remember");
+                            if (null != remember && remember.equals("true")) {
+                                CookieController.createUserCookie(request, response, user.getId());
+                            } else {
+                                CookieController.destroyUserCookie(request, response);
+                            }
+
                             out.print(true);
                         } else {
                             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -85,12 +93,6 @@ public class UsrSessonController extends HttpServlet {
                         }
                     }
                 }
-            }else if (uri.contains(S_SIGNOUT)){
-                HttpSession session = request.getSession(false);
-                session.removeAttribute("account");
-                session.invalidate();
-                request.getSession(true);
-                response.sendRedirect(request.getContextPath() + "/Views/Home.jsp");
             }
         }
     }
@@ -105,12 +107,39 @@ public class UsrSessonController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        processLoginRequestFromAuthenticatedCookie(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    }
+
+    private void processLoginRequestFromAuthenticatedCookie(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (request.getRequestURI().contains(S_SIGNIN)) {
+            String uid = request.getParameter("uid");
+            User user = null;
+            if (null != uid && (user = DAO.instance().fetchLoginDetails(uid)) != null) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("account", user);
+                CookieController.createUserCookie(request, response, user.getId());
+                response.sendRedirect(request.getContextPath() + "/Views/Private/UserHome.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/Views/Login.jsp");
+            }
+        } else if (request.getRequestURI().contains(S_SIGNOUT)) {
+            HttpSession session = request.getSession(false);
+            
+            if(null != session && null != session.getAttribute("account")) {
+                session.removeAttribute("account");
+                session.invalidate();
+            }
+            
+            CookieController.destroyUserCookie(request, response);
+            request.getSession(true);
+            response.sendRedirect(request.getContextPath() + "/Views/Home.jsp");
+        }
     }
 }

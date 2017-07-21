@@ -3,21 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/web/resources/Styles/Style.css</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/web/Views/Login.jsp</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/web/Views/Private/UserHome.jsp</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/web/Views/Tariff.jsp</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/src/java/com/cb/sesson/UsrSessonController.java</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/web/resources/Scripts/validation.js</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/web/resources/Scripts/data.js</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/src/java/com/cb/booking/BookingController.java</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/src/java/com/cb/db/DAO.java</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/src/java/com/cb/model/Booking.java</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/web/resources/Styles/Account.css</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/src/java/com/cb/db/QueryStrings.java</file>
             <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/web/Views/Private/Booking.jsp</file>
-            <file>file:/C:/Users/BASAK/Documents/NetBeansProjects/CabBooking/web/Views/Private/UserProfileInfo.jsp</file>
         </group>
     </open-files>
 </project-private>

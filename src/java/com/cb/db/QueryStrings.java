@@ -14,9 +14,12 @@ public interface QueryStrings {
     String I_USR_INFO = "INSERT INTO account VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     String I_BOOKING_INFO = "INSERT INTO booking VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
+    String Q_USR_INFO_ID = "SELECT * FROM account WHERE usrid = ?";
     String Q_USR_INFO_PH = "SELECT * FROM account WHERE contact = ? and passwd = ?";
     String Q_USR_INFO_EM = "SELECT * FROM account WHERE email = ? and passwd = ?";
     
     String Q_FARE_INFO = "SELECT * FROM fare";
     String Q_FARE_INFO_BY_CITY = "SELECT * FROM fare WHERE city = ?";
+    
+    String Q_CARS_INFO = "SELECT * FROM cars";
 }

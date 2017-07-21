@@ -5,6 +5,17 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.cb.model.User"%>
+
+<%--
+    if( null == request.getSession(false) || null == request.getSession(false).getAttribute("account")) {
+        response.sendRedirect(request.getContextPath() + "/Views/Login.jsp");
+        return;
+    }
+--%>
+
+<% User user = (User) request.getSession(false).getAttribute("account");%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,6 +26,7 @@
         <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/Styles/Style.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/Styles/calendar.css">
+        <link rel="stylesheet" href="../../resources/Styles/Account.css">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
         <style type="text/css">
@@ -71,43 +83,43 @@
                 <!-- Top row, always visible -->
                 <div class="mdl-layout__header-row">
                     <!-- Title -->
-                    <span class="mdl-layout-title">Google Material Design Components</span>
-                    <div class="mdl-layout-spacer"></div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                         mdl-textfield--floating-label mdl-textfield--align-right">
-                        <label class="mdl-button mdl-js-button mdl-button--icon"
-                               for="waterfall-exp">
-                            <i class="material-icons">search</i>
-                        </label>
-                        <div class="mdl-textfield__expandable-holder">
-                            <input class="mdl-textfield__input" type="text" name="sample"
-                                   id="waterfall-exp">
+                    <span class="mdl-layout-title">Title</span>
+                    <div class="mdl-layout-spacer">
+                        <div class="search-group">
+                            <div><i class="material-icons">search</i></div>
+                            <div class="input-wrapper"><input type="text" class="search-input" placeholder="Search"/></div>
+                        </div>
+                        <div class="user-acc-group">
+                            <i class="material-icons">account_circle</i>
+                            <span><%= user.getFirstName()%></span>
                         </div>
                     </div>
+
                 </div>
                 <!-- Bottom row, not visible on scroll -->
                 <div class="mdl-layout__header-row">
                     <div class="mdl-layout-spacer"></div>
                     <!-- Navigation -->
                     <nav class="mdl-navigation">
-                        <a class="mdl-navigation__link" href="Home.html">home</a>
-                        <a class="mdl-navigation__link" href="simple.html">services</a>
-                        <a class="mdl-navigation__link" href="cars.html">cars</a>
-                        <a class="mdl-navigation__link" href="Tariff.html">tariffs</a>
-                        <a class="mdl-navigation__link" href="Faq.html">faq</a>
-                        <button class="mdl-button mdl-js-button  mdl-js-ripple-effect  mdl-button--colored">
-                            Know us
-                        </button>
+                        <a class="mdl-navigation__link" href="">Link</a>
+                        <a class="mdl-navigation__link" href="">Link</a>
+                        <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/session/logout.do">Link</a>
+                        <a class="mdl-navigation__link" href="">Link</a>
                     </nav>
                 </div>
             </header>
             <div class="mdl-layout__drawer">
                 <span class="mdl-layout-title">Title</span>
                 <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
-                    <a class="mdl-navigation__link" href="">Link</a>
+                    <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/Views/Private/Booking.jsp"><i class="material-icons">assignment</i> Book cab</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons">show_chart</i> Booking status</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons">assignment</i> Settings</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons">history</i> History</a>
+                    <hr>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons">settings</i> Settings</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons">feedback</i> Send feedback</a>
+                    <a class="mdl-navigation__link" href=""><i class="material-icons">help</i> Help</a>
+
                 </nav>
             </div>
             <main class="mdl-layout__content">
@@ -138,6 +150,10 @@
                                             <input class="mdl-textfield__input" type="text" id="pick-loc" placeholder="Pick location">
                                             <label class="mdl-textfield__label" for="pick-loc"></label>
                                         </div>
+                                        <span class="mdl-chip mdl-chip--deletable">
+                                            <span class="mdl-chip__text">Deletable Chip</span>
+                                            <button type="button" class="mdl-chip__action"><i class="material-icons">cancel</i></button>
+                                        </span>
                                     </div>
                                     <div class="mdl-cell mdl-cell--1-col v_bar">
                                         <button class="mdl-button mdl-js-button mdl-button--fab" onclick="swapLocation();">
@@ -150,6 +166,10 @@
                                             <input class="mdl-textfield__input" type="text" id="drop-loc" placeholder="Pick location">
                                             <label class="mdl-textfield__label" for="drop-loc"></label>
                                         </div>
+                                        <span class="mdl-chip mdl-chip--deletable">
+                                            <span class="mdl-chip__text">Deletable Chip</span>
+                                            <button type="button" class="mdl-chip__action"><i class="material-icons">cancel</i></button>
+                                        </span>
                                     </div>
                                 </div>
 
@@ -202,7 +222,7 @@
 
                                         </div>
                                     </div>
-                                         <div class="mdl-cell mdl-cell--1-col">
+                                    <div class="mdl-cell mdl-cell--1-col">
                                         <div class="md-select time-select">
                                             <label for="ul-id"><button type="button" class="ng-binding" id="format">AM</button></label>
                                             <ul role="listbox" id="ul-id" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
@@ -226,28 +246,106 @@
                             <fieldset>
                                 <div class="mdl-grid">
                                     <div class="mdl-cell mdl-cell--3-col ">
-                                        <h6 class="stepper-heading">Choose car</h6>
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--4-col pad_rt">
-                                        <h6 class="stepper-subheading">Select car type</h6>
-                                        <i class="material-icons car-icon">directions_car</i>
-                                        <div class="md-select">
-
-                                            <label for="ul-id"><button type="button" class="ng-binding" id="car-type">Choose car type</button></label>
-                                            <ul role="listbox" id="ul-id" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
-                                                <li role="option" id="state2_AK" class="ng-binding ng-scope active" tabindex="-1" aria-selected="true">Mini</li>
-                                                <li role="option" id="state2_AL" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Prime</li>
-                                                <li role="option" id="state2_AR" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Luxury</li>
-                                                <li role="option" id="state2_AS" class="ng-binding ng-scope" tabindex="-1" aria-selected="false">Royal</li>
-                                            </ul>
+                                        <h6 class="stepper-heading">Filter</h6>
+                                        <div class="filter-tag">
 
                                         </div>
+                                        <h6 class="stepper-subheading">Type</h6>
+                                        <div class="filter-tag">
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Prime</span>
+                                            </label>
+
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Sedan</span>
+                                            </label>
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Luxury</span>
+                                            </label>
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Royal</span>
+                                            </label>
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Zeep</span>
+                                            </label>
+                                        </div>
+                                        <h6 class="stepper-subheading">Model</h6>
+                                        <div class="filter-tag">
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Prime</span>
+                                            </label>
+
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Sedan</span>
+                                            </label>
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Luxury</span>
+                                            </label>
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Royal</span>
+                                            </label>
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Zeep</span>
+                                            </label>
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Prime</span>
+                                            </label>
+
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Sedan</span>
+                                            </label>
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Luxury</span>
+                                            </label>
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Royal</span>
+                                            </label>
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <span class="mdl-checkbox__label">Zeep</span>
+                                            </label>
+                                        </div>
                                     </div>
+
                                     <div class="mdl-cell mdl-cell--1-col v_bar">
 
                                     </div>
-                                    <div class="mdl-cell mdl-cell--4-col pad_lt">
+                                    <div class="mdl-cell mdl-cell--8-col">
                                         <h6 class="stepper-subheading">Select your car</h6>
+                                        <div class="card-component-wrapper">
+                                            <div class="demo-card-wide mdl-card mdl-shadow--2dp car-card">
+                                                <div class="mdl-card__title">
+                                                    <img src="../../resources/Assets/Images/bmw.jpg" />
+                                                </div>
+                                                <div class="mdl-card__supporting-text">
+                                                    <h6 class="stepper-subheading">Suzuki</h6>
+                                                    Lorem ipsum 
+                                                </div>
+                                                <div class="mdl-card__actions mdl-card--border">
+                                                    <a class="mdl-button  mdl-js-button mdl-js-ripple-effect">
+                                                        select
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
                                         <ul class="demo-list-icon mdl-list" id="car">
                                             <!--<li class="mdl-list__item">-->
                                             <!--<span class="mdl-list__item-primary-content">-->
@@ -264,6 +362,9 @@
 
                                 <div class="mdl-grid">
                                     <div class="mdl-cell mdl-cell--12-col text-right">
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                            previous
+                                        </button>
                                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="goToNext(this);">
                                             next
                                         </button>
@@ -330,6 +431,9 @@
 
                                 <div class="mdl-grid">
                                     <div class="mdl-cell mdl-cell--12-col text-right">
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                            previous
+                                        </button>
                                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="goToNext(this);">
                                             next
                                         </button>
@@ -425,8 +529,6 @@
                                             var year = now.getFullYear();
                                             var month = now.getMonth() + 1;
                                             var date = now.getDate();
-
-
                                             var data = [{
                                                     date: year + '-' + month + '-' + (date - 1),
                                                     value: 'hello'
@@ -440,9 +542,6 @@
                                                     date: '2016-10-31',
                                                     value: '2016-10-31'
                                                 }];
-
-
-
                                             // picker
                                             $('#two').calendar({
                                                 trigger: '#dt',
@@ -468,25 +567,54 @@
                                                     console.log('data:' + (data || '无'));
                                                 }
                                             });
-                                            window.onload = function () {
-                                                populateList(car_list);
-                                            }
+                                            $(document).ready(function () {
 
+                                                $.ajax({
+                                                    url: '${pageContext.request.contextPath}/Car.do',
+                                                    type: "GET",
+                                                    success: function (response) {
+                                                        populateList(response);
+                                                    },
+                                                    error: function (response, error) {
+                                                        alert(error);
+                                                    }
+                                                })
+
+                                            });
                                             function populateList(cars) {
-                                                var _ul = document.getElementById('car');
+                                                var card_wrapper = document.querySelector(".card-component-wrapper");
                                                 [].forEach.call(cars, function (_car) {
-                                                    var _li = document.createElement('li');
-                                                    _li.className = 'mdl-list__item';
-                                                    var _span = document.createElement('span');
-                                                    _span.className = 'mdl-list__item-primary-content ';
-                                                    var _img = document.createElement('img');
-                                                    _img.className = 'mdl-list__item-icon';
-                                                    _img.src = _car.car_image;
-                                                    _span.innerText = _car.car_name;
 
-                                                    _span.prepend(_img)
-                                                    _li.appendChild(_span);
-                                                    _ul.appendChild(_li);
+
+                                                    var _mdl_card = document.createElement('div');
+                                                    _mdl_card.className = "demo-card-wide mdl-card mdl-shadow--2dp car-card";
+
+                                                    var _mdl_card_text = document.createElement('div');
+                                                    _mdl_card_text.className = "mdl-card__title";
+                                                    var _img = document.createElement('img');
+                                                    _img.src = _car.carImageURI;
+                                                    _mdl_card_text.appendChild(_img);
+                                                    _mdl_card.appendChild(_mdl_card_text);
+
+                                                    var _mdl_card_inner = document.createElement('div');
+                                                    _mdl_card_inner.className = "mdl-card__supporting-text";
+                                                    var _heading = document.createElement('h6');
+                                                    _heading.className = "stepper-subheading";
+                                                    _heading.innerText = _car.carName;
+                                                    _mdl_card_inner.innerText = _car.carModel;
+                                                    _mdl_card_inner.prepend(_heading);
+                                                    _mdl_card.appendChild(_mdl_card_inner);
+
+                                                    var _mdl_card_action = document.createElement('div');
+                                                    _mdl_card_action.className = "mdl-card__actions mdl-card--border";
+                                                    var _a = document.createElement('a');
+                                                    _a.className = "mdl-button  mdl-js-button mdl-js-ripple-effect";
+                                                    _a.innerText = "Select";
+                                                    _mdl_card_action.appendChild(_a);
+                                                    _mdl_card.appendChild(_mdl_card_action);
+
+
+                                                    card_wrapper.appendChild(_mdl_card);
                                                 });
                                             }
 

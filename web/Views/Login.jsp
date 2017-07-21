@@ -80,7 +80,8 @@
                     type: 'POST',
                     data: {
                         userid: $('#userid').val(),
-                        passwd: $('#passwd').val()
+                        passwd: $('#passwd').val(),
+                        remember: $('#switch-1').is(':checked')
                     },
 
                     success: function(response) {

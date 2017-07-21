@@ -550,7 +550,33 @@ START OF BOOKING CSS
     cursor:pointer;
     outline:none;
 }
-
+.filter-tag{
+    padding:20px 0;
+    background:#fcfcfc;
+    max-height:200px;
+    overflow-y:auto;
+}
+.filter-tag .mdl-checkbox{
+    margin:5px 0;
+}
+.filter-tag .mdl-checkbox .mdl-checkbox__label{
+    font-size:14px;
+    font-size:1rem;
+}
+.car-card{
+    width:32%;
+    display:inline-block;
+}
+.card-component-wrapper{
+    padding:10px 0;
+}
+.car-card .mdl-card__title{
+    padding: 0;
+}
+.car-card img{
+    width:200px;
+    height:120px;
+}
 .car-icon{
     padding:20px;
     background:#92a5a4;
@@ -624,3 +650,26 @@ START OF SIGNUP CSS
 END OF SIGNUP CSS
 ===================================================*/
 
+/*=================================================
+START OF FORGET PASSWORD CSS
+===================================================*/
+
+.forget-icon-bg{
+    display:flex;
+    align-items: center;
+    height:400px;
+    justify-content: center;
+}
+
+.forget-icon-bg>h1{
+   width:150px;
+   height:150px;
+   background:#ddd;
+   font-size: 7.5rem;
+   text-align: center;
+   border-radius:50%;
+}
+.forget-icon-bg>h1>i{
+    font-size:5rem;
+    color:#999;
+}

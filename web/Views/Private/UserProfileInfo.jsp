@@ -60,7 +60,7 @@
             <div class="mdl-layout__drawer">
                 <span class="mdl-layout-title">Title</span>
                 <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">assignment</i> Book cab</a>
+                    <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/Views/Private/Booking.jsp"><i class="material-icons">assignment</i> Book cab</a>
                     <a class="mdl-navigation__link" href=""><i class="material-icons">show_chart</i> Booking status</a>
                     <a class="mdl-navigation__link" href=""><i class="material-icons">assignment</i> Settings</a>
                     <a class="mdl-navigation__link" href=""><i class="material-icons">history</i> History</a>
