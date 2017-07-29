@@ -79,7 +79,7 @@
 
       <div class="mdl-grid ">
         <div class="mdl-cell mdl-cell--6-col section text-center">
-            <img src="../resources/Assets/Images/Capture.PNG" />
+            <img src="../resources/Assets/Images/payment-mockup.png" />
         </div>
         <div class="mdl-cell mdl-cell--6-col   section">
           <h2 class="section-component-heading">Go cashless</h2>

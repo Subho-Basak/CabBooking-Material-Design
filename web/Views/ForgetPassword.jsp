@@ -25,17 +25,21 @@
                             <p class="section-para">Please enter your primary email address that you have with <b>site name</b>.</p>
                             <p class="section-para">We will then send you an email with unique link to change your password.</p>
 
-
-                            <div class="mdl-cell mdl-cell--6-col ">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input required" type="text" id="passwd" onkeypress="resetError(this)" onchange="resetError(this)">
-                                    <label class="mdl-textfield__label" for="passwd">Email</label>
+                            <form method="post" action="${pageContext.request.contextPath}/session/recoverForgotEmail.do">
+                                <div class="mdl-cell mdl-cell--6-col ">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input required email" type="text" name="email" id="email" onkeypress="resetError(this)" onchange="resetError(this)">
+                                        <label class="mdl-textfield__label" for="email">Email</label>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <button class="mdl-button mdl-js-button  mdl-button--raised mdl-js-ripple-effect  mdl-button--colored"  id="signin">
-                                send password recovery link
-                            </button>
+                                <button type="submit" class="mdl-button mdl-js-button  mdl-button--raised mdl-js-ripple-effect  mdl-button--colored"  id="signin" >
+                                    send password recovery link
+                                </button>
+                                <div>
+                                    <input type="hidden" value="${requestScope.success}">
+                                </div>
+                            </form>
                         </div>
                         <div class="mdl-cell mdl-cell--4-col forget-icon-bg">
                             <h1>
@@ -50,5 +54,10 @@
 
 
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+        <script>
+                                    
+        </script>        
+
     </body>
 </html>

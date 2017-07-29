@@ -18,77 +18,177 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>User account</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-        <link rel="stylesheet" href="../../resources/Styles/Account.css">
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" type="text/css">
-    </head>
-    <body>
-        <div class="demo-layout-waterfall mdl-layout mdl-js-layout">
-            <header class="mdl-layout__header mdl-layout__header--waterfall">
-                <!-- Top row, always visible -->
-                <div class="mdl-layout__header-row">
-                    <!-- Title -->
-                    <span class="mdl-layout-title">Title</span>
-                    <div class="mdl-layout-spacer">
-                        <div class="search-group">
-                            <div><i class="material-icons">search</i></div>
-                            <div class="input-wrapper"><input type="text" class="search-input" placeholder="Search"/></div>
-                        </div>
-                        <div class="user-acc-group">
-                            <i class="material-icons">account_circle</i>
-                            <span><%= user.getFirstName() %></span>
-                        </div>
-                    </div>
-                    
-                </div>
-                <!-- Bottom row, not visible on scroll -->
-                <div class="mdl-layout__header-row">
-                    <div class="mdl-layout-spacer"></div>
-                    <!-- Navigation -->
-                    <nav class="mdl-navigation">
-                        <a class="mdl-navigation__link" href="">Link</a>
-                        <a class="mdl-navigation__link" href="">Link</a>
-                        <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/session/logout.do">Link</a>
-                        <a class="mdl-navigation__link" href="">Link</a>
-                    </nav>
-                </div>
-            </header>
-            <div class="mdl-layout__drawer">
-                <span class="mdl-layout-title">Title</span>
-                <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/Views/Private/Booking.jsp"><i class="material-icons">assignment</i> Book cab</a>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">show_chart</i> Booking status</a>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">assignment</i> Settings</a>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">history</i> History</a>
-                    <hr>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">settings</i> Settings</a>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">feedback</i> Send feedback</a>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">help</i> Help</a>
-                 
-                </nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="../../resources/Styles/Style.css">
+  <link rel="stylesheet" href="../../resources/Styles/Account.css">
+  
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+</head>
+<body bgcolor="#f1f1f1">
+<div class="mdl-layout mdl-js-layout">
+  <header class="mdl-layout__header mdl-layout__header--scroll private-header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Title</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation -->
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link account-group"><i class="material-icons">account_circle</i><span>User Firstname</span>
+
+          <div class="profile-dropdown">
+            <div class="top-cap"></div>
+            <div class="user-avatar-bg text-center">
+              <img src="../../Assets/Images/avater.jpg" />
             </div>
-            <main class="mdl-layout__content">
-                <div class="page-content main-page">
-                    <section class="mdl-grid user-info-section">
-                        <div class="mdl-grid">
-                          <div class="mdl-cell mdl-cell--12-col">
-                              <p><%= user.getFirstName() + " " + user.getLastName() %></p>
-                              <p><%= user.getEmail() %></p>
-                              <p><%= user.getAddress() %></p>
-                              <p><%= user.getContact() %></p>
-                          </div>
-                </div>
-            </main>
+            <h5>Full Name</h5>
+            <p>email id</p>
+            <div class="profile-dropdown-footer">
+              <button href="" class="text-link">profile</button>
+              <button onclick="window.location.href='${pageContext.request.contextPath}/session/logout.do';" class="text-link">Logout</button>
+            </div>
+          </div>
+
+
+        </a>
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Title</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <div class="page-content"><!-- Your content goes here -->
+      <section class="mdl-grid profile-info">
+
+          <div class="mdl-cell mdl-cell--6-col">
+            <h5 class="site-subheading">Personal info</h5>
+          </div>
+          <div class="mdl-cell mdl-cell--6-col text-right">
+            <h5><i class="material-icons">mode_edit</i></h5>
+          </div>
+          <hr>
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>Name</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+            <p><%= user.getFirstName() + " " + user.getLastName() %></p>
+        </div>
+
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>Email</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+            <p><%= user.getEmail() %></p>
+        </div>
+
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>Birthday</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <p>Not set</p>
+        </div>
+
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>Gender</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <p>Not set</p>
+        </div>
+
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>Nationality</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <p>Not set</p>
+        </div>
+
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>Photo</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <img src="../../Assets/Images/avater.jpg" />
+        </div>
+
+      </section>
+
+      <section class="mdl-grid profile-info">
+
+        <div class="mdl-cell mdl-cell--6-col">
+          <h5 class="site-subheading">Contact info</h5>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col text-right">
+          <h5><i class="material-icons">mode_edit</i></h5>
+        </div>
+        <hr>
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>Address</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <p><%= user.getAddress() !=null && !user.getAddress().isEmpty() ? user.getAddress() : "Not set" %></p>
+        </div>
+
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>Contact</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <p><%= user.getContact()!=null && !user.getContact().isEmpty() ? user.getContact(): "Not set" %></p>
+        </div>
+
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>Country</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <p><%= user.getCountry()!=null && !user.getCountry().isEmpty() ? user.getCountry(): "Not set" %></p>
+        </div>
+
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>State</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <p>Not set</p>
+        </div>
+
+      </section>
+
+      <section class="mdl-grid profile-info">
+
+        <div class="mdl-cell mdl-cell--6-col">
+          <h5 class="site-subheading">Security</h5>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col text-right">
+          <h5><i class="material-icons">mode_edit</i></h5>
+        </div>
+        <hr>
+        <div class="mdl-cell mdl-cell--4-col">
+          <strong>Password</strong>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col">
+          <a href="" class="text-link">Change</a>
         </div>
 
 
 
+      </section>
+    </div>
+  </main>
+</div>
 
-        <script src="../resources/Scripts/jquery-2.1.1.js"></script>
-        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    </body>
+
+
+
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+</body>
 </html>

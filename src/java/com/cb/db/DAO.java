@@ -53,6 +53,27 @@ public class DAO implements Serializable, AutoCloseable {
 
         return idExist;
     }
+    
+    public boolean isEmailExists(String email) {
+        boolean exist = false;
+
+        try {
+            open();
+
+            pstmt = db.prepareStatement(QueryStrings.Q_USR_EMAILID_EXIST);
+            pstmt.setString(1, email);
+            rs = pstmt.executeQuery();
+
+            if (null != rs && rs.next()) {
+                exist = true;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return exist;
+    }
 
     public boolean createNewUser(User user) {
         boolean isCreated = false;

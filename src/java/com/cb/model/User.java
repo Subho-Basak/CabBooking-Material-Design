@@ -8,14 +8,14 @@ import java.util.Calendar;
  */
 public class User {
     
-    private String id, firstname, lastname, address, email, contact, gender, password;
+    private String id, firstName, lastName, address,country,state, email, contact, gender, password;
 
     public User() {
     }
 
     public User(String firstname, String lastname, String address, String email, String contact, String password) {
-        this.firstname = firstname.trim();
-        this.lastname = lastname.trim();
+        this.firstName = firstname.trim();
+        this.lastName = lastname.trim();
         this.address = address.trim();
         this.email = email != null ? email.trim() : email;
         this.contact = contact.trim();
@@ -23,7 +23,7 @@ public class User {
         this.gender = null;
         this.id = generateID();
     }
-    
+
     public String getId() {
         return id;
     }
@@ -33,19 +33,19 @@ public class User {
     }
 
     public String getFirstName() {
-        return firstname;
+        return firstName;
     }
 
-    public void setFirstName(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
-        return lastname;
+        return lastName;
     }
 
-    public void setLastName(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -54,6 +54,22 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getEmail() {
@@ -87,12 +103,14 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
+    
+    
     private String generateID() {
         StringBuilder sb = new StringBuilder();
         
-        sb.append(firstname.charAt(0));
-        sb.append(lastname.charAt(0));
+        sb.append(firstName.charAt(0));
+        sb.append(lastName.charAt(0));
         sb.append("-");
         sb.append(String.valueOf(Calendar.getInstance().getTimeInMillis()));
         

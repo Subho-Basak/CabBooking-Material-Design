@@ -74,44 +74,74 @@
                 top:-40% !important;
                 left:calc(50% - 170px) !important;
             }
+            .pac-item{
+                font-family:roboto;
+                padding:10px;
+                padding-bottom:0;
+                font-size: 13px;
+                border-top:none;
+            }
+            .pac-item >span:nth-last-of-type(1){
+                display:block;
+                margin-left:22px;
+                margin-top: -10px;
+                color: darkslategray;
+                border-bottom: 1px solid #eee;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                height: 30px;
+            }
+            .pac-item-query{
+                font-size:14px;
+                font-weight: 500;
+            }
+            .pac-matched{
+                color:gray;
+                font-weight: 500;
+            }
+            .pac-icon{
+                background:url(http://cdn.onlinewebfonts.com/svg/img_171095.svg) no-repeat;
+                background-position: 0 0;
+                margin-top: 10px;
+                opacity:0.5;
+            }
         </style>
     </head>
     <body bgcolor="#f3f3f3">
 
-        <div class="demo-layout-waterfall mdl-layout mdl-js-layout">
-            <header class="mdl-layout__header mdl-layout__header--waterfall">
-                <!-- Top row, always visible -->
+        <div class="demo-layout-waterfall mdl-layout mdl-js-layout height-auto">
+            <header class="mdl-layout__header mdl-layout__header--scroll private-header">
                 <div class="mdl-layout__header-row">
                     <!-- Title -->
                     <span class="mdl-layout-title">Title</span>
-                    <div class="mdl-layout-spacer">
-                        <div class="search-group">
-                            <div><i class="material-icons">search</i></div>
-                            <div class="input-wrapper"><input type="text" class="search-input" placeholder="Search"/></div>
-                        </div>
-                        <div class="user-acc-group">
-                            <i class="material-icons">account_circle</i>
-                            <span><%= user.getFirstName()%></span>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- Bottom row, not visible on scroll -->
-                <div class="mdl-layout__header-row">
+                    <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
                     <!-- Navigation -->
                     <nav class="mdl-navigation">
-                        <a class="mdl-navigation__link" href="">Link</a>
-                        <a class="mdl-navigation__link" href="">Link</a>
-                        <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/session/logout.do">Link</a>
-                        <a class="mdl-navigation__link" href="">Link</a>
+                        <a class="mdl-navigation__link account-group" href=""><i class="material-icons">account_circle</i><span><%= user.getFirstName()%></span>
+
+                            <div class="profile-dropdown">
+                                <div class="top-cap"></div>
+                                <div class="user-avatar-bg text-center">
+                                    <img src="../../Assets/Images/avater.jpg" />
+                                </div>
+                                <h5>Full Name</h5>
+                                <p>email id</p>
+                                <div class="profile-dropdown-footer">
+                                    <button href="" class="text-link">profile</button>
+                                    <button href="" class="text-link">Logout</button>
+                                </div>
+                            </div>
+
+
+                        </a>
                     </nav>
                 </div>
             </header>
             <div class="mdl-layout__drawer">
                 <span class="mdl-layout-title">Title</span>
                 <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/Views/Private/Booking.jsp"><i class="material-icons">assignment</i> Book cab</a>
+                    <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/Views/Private/Booking.jsp""><i class="material-icons">assignment</i> Book cab</a>
                     <a class="mdl-navigation__link" href=""><i class="material-icons">show_chart</i> Booking status</a>
                     <a class="mdl-navigation__link" href=""><i class="material-icons">assignment</i> Settings</a>
                     <a class="mdl-navigation__link" href=""><i class="material-icons">history</i> History</a>
@@ -119,17 +149,13 @@
                     <a class="mdl-navigation__link" href=""><i class="material-icons">settings</i> Settings</a>
                     <a class="mdl-navigation__link" href=""><i class="material-icons">feedback</i> Send feedback</a>
                     <a class="mdl-navigation__link" href=""><i class="material-icons">help</i> Help</a>
-
                 </nav>
             </div>
             <main class="mdl-layout__content">
                 <div class="page-content">
 
                     <section class="mdl-grid booking-banner">
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--12-col text-center">
-                                <h2 class="section-component-heading ">Book your trip</h2>
-                            </div>
+                        <div class="mdl-grid"> 
                             <div class="mdl-cell mdl-cell--12-col text-center stepper">
                                 <p class="step-name">Step one</p>
                                 <a class="active"></a> <a></a> <a></a>
@@ -147,13 +173,15 @@
                                     <div class="mdl-cell mdl-cell--4-col pad_rt">
                                         <h6 class="stepper-subheading">Select start location</h6>
                                         <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input" type="text" id="pick-loc" placeholder="Pick location">
+                                            <input class="mdl-textfield__input placepicker" type="text" id="origin-input" placeholder="Pick location">
                                             <label class="mdl-textfield__label" for="pick-loc"></label>
                                         </div>
-                                        <span class="mdl-chip mdl-chip--deletable">
-                                            <span class="mdl-chip__text">Deletable Chip</span>
-                                            <button type="button" class="mdl-chip__action"><i class="material-icons">cancel</i></button>
-                                        </span>
+                                        <div id="collapseOne" class="collapse">
+                                            <div class="placepicker-map thumbnail"></div>
+                                        </div>
+
+                                        <a class="text-link " target="_blanck" href="ShowRoute.jsp">View route</a>
+
                                     </div>
                                     <div class="mdl-cell mdl-cell--1-col v_bar">
                                         <button class="mdl-button mdl-js-button mdl-button--fab" onclick="swapLocation();">
@@ -163,13 +191,11 @@
                                     <div class="mdl-cell mdl-cell--4-col pad_lt">
                                         <h6 class="stepper-subheading">Select drop location</h6>
                                         <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input" type="text" id="drop-loc" placeholder="Pick location">
-                                            <label class="mdl-textfield__label" for="drop-loc"></label>
+                                            <input class="mdl-textfield__input placepicker" type="text" id="destination-input" placeholder="Pick location">
+                                            <label class="mdl-textfield__label" for="destination-input"></label>
                                         </div>
-                                        <span class="mdl-chip mdl-chip--deletable">
-                                            <span class="mdl-chip__text">Deletable Chip</span>
-                                            <button type="button" class="mdl-chip__action"><i class="material-icons">cancel</i></button>
-                                        </span>
+
+
                                     </div>
                                 </div>
 
@@ -253,24 +279,24 @@
                                         <h6 class="stepper-subheading">Type</h6>
                                         <div class="filter-tag">
                                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
-                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" >
                                                 <span class="mdl-checkbox__label">Prime</span>
                                             </label>
 
                                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
-                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" >
                                                 <span class="mdl-checkbox__label">Sedan</span>
                                             </label>
                                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
-                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" >
                                                 <span class="mdl-checkbox__label">Luxury</span>
                                             </label>
                                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
-                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" >
                                                 <span class="mdl-checkbox__label">Royal</span>
                                             </label>
                                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
-                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+                                                <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" >
                                                 <span class="mdl-checkbox__label">Zeep</span>
                                             </label>
                                         </div>
@@ -321,27 +347,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="mdl-cell mdl-cell--1-col v_bar">
-
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--8-col">
+                                    <div class="mdl-cell mdl-cell--9-col">
                                         <h6 class="stepper-subheading">Select your car</h6>
                                         <div class="card-component-wrapper">
-                                            <div class="demo-card-wide mdl-card mdl-shadow--2dp car-card">
-                                                <div class="mdl-card__title">
-                                                    <img src="../../resources/Assets/Images/bmw.jpg" />
-                                                </div>
-                                                <div class="mdl-card__supporting-text">
-                                                    <h6 class="stepper-subheading">Suzuki</h6>
-                                                    Lorem ipsum 
-                                                </div>
-                                                <div class="mdl-card__actions mdl-card--border">
-                                                    <a class="mdl-button  mdl-js-button mdl-js-ripple-effect">
-                                                        select
-                                                    </a>
-                                                </div>
-
-                                            </div>
+                                            
                                         </div>
 
 
@@ -520,6 +529,9 @@
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMBupiuW1wy6k2rX_WbbKgpsAahf7HFIQ&sensor=true&language=en&libraries=places"></script>
+        <script src="https://www.jqueryscript.net/demo/jQuery-Location-Autocomplete-with-Google-Maps-Places-Library-Placepicker/src/js/jquery.placepicker.js"></script>
+
         <script src="../../resources/Scripts/basic-utility.js"></script>
         <script src="../../resources/Scripts/data.js"></script>
         <script src="../../resources/Scripts/calendar.js"></script>
@@ -580,6 +592,29 @@
                                                     }
                                                 })
 
+
+                                                $(".placepicker").each(function () {
+
+                                                    // find map-element
+                                                    var target = this;
+                                                    var $collapse = $(this).parents('.form-group').next('.collapse');
+                                                    var $map = $collapse.find('.placepicker-map');
+
+                                                    // init placepicker
+                                                    var placepicker = $(this).placepicker({
+                                                        map: $map.get(0)
+                                                    }).data('placepicker');
+
+                                                    // reload map after collapse in
+                                                    $collapse.on('show.bs.collapse', function () {
+
+                                                        window.setTimeout(function () {
+                                                            if (!$(target).prop('value')) {
+                                                                placepicker.geoLocation();
+                                                            }
+                                                        }, 0);
+                                                    });
+                                                });
                                             });
                                             function populateList(cars) {
                                                 var card_wrapper = document.querySelector(".card-component-wrapper");

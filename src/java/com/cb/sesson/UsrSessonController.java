@@ -21,6 +21,7 @@ public class UsrSessonController extends HttpServlet {
     private static final String S_SIGNUP = "signup";
     private static final String S_SIGNIN = "login";
     private static final String S_SIGNOUT = "logout";
+    private static final String S_RECOVER_EMAIL = "recoverForgotEmail";
 
     private static final String USERID = "userid";
     private static final String FNAME = "fname";
@@ -92,6 +93,18 @@ public class UsrSessonController extends HttpServlet {
                             out.print(false);
                         }
                     }
+                }
+            } else if(uri.contains(S_RECOVER_EMAIL)) {
+                email = request.getParameter("email");
+                String resetPasswordHTMLTemplate = "set template here";
+                if( null != email && !email.isEmpty()) {
+                    if(DAO.instance().isEmailExists(email)) {
+                        if(ForgetPasswordController.Mailer.send("subhankar.kgp.16@gmail.com", "whiyyxhcpgpuufas", email, "Reset Password", resetPasswordHTMLTemplate)) {
+                            request.setAttribute("success", true);
+                        }
+                    } else 
+                        request.setAttribute("success", false);
+                    request.getRequestDispatcher("/Views/ForgetPassword.jsp").forward(request, response);
                 }
             }
         }

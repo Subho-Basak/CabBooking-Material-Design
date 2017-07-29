@@ -63,7 +63,7 @@ a{
 }
 
 .mdl-layout__drawer-button{
-outline:none;
+    outline:none;
 }
 .mdl-button--colored{
     background: #448aff !important;
@@ -116,7 +116,9 @@ outline:none;
     padding:2% 0;
     margin:5%  auto;
 }
-
+.section img{
+    width:100%;
+}
 .section-component-heading{
     font-weight:300;
     font-size:2.75rem;
@@ -280,6 +282,13 @@ outline:none;
     height:40px;
     border-radius:50%;
 }
+.mdl-switch.is-checked .mdl-switch__track {
+    background: rgba(68,138,255,.5)  !important;
+}
+.mdl-switch__thumb{
+    background:rgb(68,138,255) !important;
+
+}
 /*=================================================
 END OF COMMON CSS
 ===================================================*/
@@ -300,18 +309,28 @@ START OF LOGIN CSS
     background:#fff;
     width:30%;
     height:70%;
-    padding:0 2%;
+    /*    padding:0 2%;*/
     box-shadow:0 0 8px 0 rgba(100,100,100,0.5);
 }
-
+.login-panel {
+    padding-left: 8%;
+    padding-right: 8%;
+}
 .text-link{
     color:#448aff;
     line-height:2.5;
-    font-weight:400;
-    font-size:1.2rem;
+    font-weight:500;
+    font-size:1.1rem;
+    font-size: 15px;
+    cursor:pointer;
+    background:none;
+    border:none;
+    outline:none;
 }
 
-
+.mdl-progress {
+    display: none;
+}
 
 /*=================================================
 END OF LOGIN CSS
@@ -367,6 +386,7 @@ START OF TARIFF CSS
     width:100%;
     height:100vh;
     background:rgba(10,10,10,0.2);
+    z-index:2000;
 }
 .dialog-wrapper .dialog-main{
     background:white;
@@ -495,7 +515,7 @@ START OF BOOKING CSS
     box-shadow: 0 0 4px 0 rgba(10,10,10,0.4);
 }
 .booking-stepper>fieldset{
-
+    
     padding:20px;
 }
 .booking-stepper fieldset .stepper-heading{
@@ -564,18 +584,23 @@ START OF BOOKING CSS
     font-size:1rem;
 }
 .car-card{
-    width:32%;
+    width:24%;
+    margin-right:5px;
     display:inline-block;
 }
 .card-component-wrapper{
+    margin:20px 0;
+    width:100%;
     padding:10px 0;
+    max-height:500px;
+    overflow-y: auto;
 }
 .car-card .mdl-card__title{
     padding: 0;
 }
 .car-card img{
-    width:200px;
-    height:120px;
+    width:100%;
+    height:100px;
 }
 .car-icon{
     padding:20px;
@@ -662,12 +687,12 @@ START OF FORGET PASSWORD CSS
 }
 
 .forget-icon-bg>h1{
-   width:150px;
-   height:150px;
-   background:#ddd;
-   font-size: 7.5rem;
-   text-align: center;
-   border-radius:50%;
+    width:150px;
+    height:150px;
+    background:#ddd;
+    font-size: 7.5rem;
+    text-align: center;
+    border-radius:50%;
 }
 .forget-icon-bg>h1>i{
     font-size:5rem;

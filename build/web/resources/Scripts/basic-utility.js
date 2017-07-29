@@ -6,7 +6,7 @@ $(document).ready(function(){
   $('.booking-stepper fieldset:not(:nth-of-type(1))').hide();
   $('.dialog-wrapper').hide();
 
-  $('.more-filter').click(function(){
+  $('.more-filter,.view-route').click(function(){
     $('.dialog-wrapper').fadeIn(300).slideDialogUp();
   });
 
@@ -37,15 +37,15 @@ $(document).ready(function(){
 
 function swapLocation(){
 
-  var pLoc = $('#pick-loc').val();
-  var dLoc = $('#drop-loc').val();
+  var pLoc = $('#origin-input').val();
+  var dLoc = $('#destination-input').val();
 
   if(pLoc != "" || dLoc != ""){
     var temp = pLoc;
     pLoc= dLoc;
     dLoc = temp;
-    $('#pick-loc').val(pLoc);
-    $('#drop-loc').val(dLoc);
+    $('#origin-input').val(pLoc);
+    $('#destination-input').val(dLoc);
   }
 
 }

@@ -43,12 +43,6 @@
         <servlet-class>com.cb.cars.CarsController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UsrSessonController</servlet-name>
-        <url-pattern>/session/signup.do</url-pattern>
-        <url-pattern>/session/login.do</url-pattern>
-        <url-pattern>/session/logout.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>FareController</servlet-name>
         <url-pattern>/farechart.do</url-pattern>
     </servlet-mapping>
@@ -59,6 +53,13 @@
     <servlet-mapping>
         <servlet-name>CarsController</servlet-name>
         <url-pattern>/Car.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsrSessonController</servlet-name>
+        <url-pattern>/session/login.do</url-pattern>
+        <url-pattern>/session/signup.do</url-pattern>
+        <url-pattern>/session/recoverForgotEmail.do</url-pattern>
+        <url-pattern>/session/logout.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

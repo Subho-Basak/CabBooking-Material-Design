@@ -87,11 +87,11 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("      <div class=\"mdl-layout-spacer\"></div>\n");
       out.write("      <!-- Navigation -->\n");
       out.write("      <nav class=\"mdl-navigation\">\n");
-      out.write("        <a class=\"mdl-navigation__link\" href=\"Home.html\">home</a>\n");
-      out.write("        <a class=\"mdl-navigation__link\" href=\"simple.html\">services</a>\n");
-      out.write("        <a class=\"mdl-navigation__link\" href=\"cars.html\">cars</a>\n");
-      out.write("        <a class=\"mdl-navigation__link\" href=\"Tariff.html\">tariffs</a>\n");
-      out.write("        <a class=\"mdl-navigation__link\" href=\"Faq.html\">faq</a>\n");
+      out.write("        <a class=\"mdl-navigation__link\" href=\"Home.jsp\">home</a>\n");
+      out.write("        <a class=\"mdl-navigation__link\" href=\"#\">services</a>\n");
+      out.write("        <a class=\"mdl-navigation__link\" href=\"Cars.jsp\">cars</a>\n");
+      out.write("        <a class=\"mdl-navigation__link\" href=\"Tariff.jsp\">tariffs</a>\n");
+      out.write("        <a class=\"mdl-navigation__link\" href=\"Faq.jsp\">faq</a>\n");
       out.write("        <button class=\"mdl-button mdl-js-button  mdl-js-ripple-effect  mdl-button--colored\">\n");
       out.write("          Know us\n");
       out.write("        </button>\n");
@@ -146,7 +146,7 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("      <div class=\"mdl-grid \">\n");
       out.write("        <div class=\"mdl-cell mdl-cell--6-col   section\">\n");
-      out.write("          <img src=\"../Untitled%20collage.jpg\" />\n");
+      out.write("            <img src=\"../resources/Assets/Images/Untitled collage.jpg\" />\n");
       out.write("        </div>\n");
       out.write("        <div class=\"mdl-cell mdl-cell--6-col   section\">\n");
       out.write("          <h2 class=\"section-component-heading\">Choose your own car</h2>\n");
@@ -168,7 +168,7 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("      <div class=\"mdl-grid \">\n");
       out.write("        <div class=\"mdl-cell mdl-cell--6-col section text-center\">\n");
-      out.write("          <img src=\"../Assets/Images/Capture.png\" />\n");
+      out.write("            <img src=\"../resources/Assets/Images/Capture.PNG\" />\n");
       out.write("        </div>\n");
       out.write("        <div class=\"mdl-cell mdl-cell--6-col   section\">\n");
       out.write("          <h2 class=\"section-component-heading\">Go cashless</h2>\n");

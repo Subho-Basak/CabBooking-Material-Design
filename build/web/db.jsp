@@ -15,5 +15,5 @@
     }
 %>
 <%=
-   ForgetPasswordController.Mailer.send("", "", "", "Test", "<a href='http://www.google.com'><h1>Goto Google</h1></a>") ? "Message Sent Successfully!" : "" 
+   ForgetPasswordController.Mailer.send("subhankar.kgp.16@gmail.com", "whiyyxhcpgpuufas", "subho.tukai@gmail.com", "Test", "<a href='http://www.google.com'><h1>Goto Google</h1></a>") ? "Message Sent Successfully!" : "" 
 %>
