@@ -138,7 +138,7 @@ public class UsrSessonController extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("account", user);
                 CookieController.createUserCookie(request, response, user.getId());
-                response.sendRedirect(request.getContextPath() + "/Views/Private/UserHome.jsp");
+                response.sendRedirect(request.getContextPath() + "/Views/Private/Dashboard.jsp");
             } else {
                 response.sendRedirect(request.getContextPath() + "/Views/Login.jsp");
             }

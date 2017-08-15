@@ -30,51 +30,7 @@
     </head>
     <body bgcolor="#f1f1f1">
         <div class="mdl-layout mdl-js-layout">
-            <header class="mdl-layout__header mdl-layout__header--scroll private-header">
-                <div class="mdl-layout__header-row">
-                    <!-- Title -->
-                    <span class="mdl-layout-title">Title</span>
-                    <!-- Add spacer, to align navigation to the right -->
-                    <div class="mdl-layout-spacer"></div>
-                    <!-- Navigation -->
-                    <nav class="mdl-navigation">
-                        <a class="mdl-navigation__link account-group" href="${pageContext.request.contextPath}/Views/Private/UserProfileInfo.jsp"><i class="material-icons">account_circle</i><span><%= user.getFirstName()%></span>
-
-                            <div class="profile-dropdown">
-                                <div class="top-cap"></div>
-                                <div class="mdl-grid"> 
-                                    <div class="mdl-cell mdl-cell--5-col user-avatar-bg text-center">
-                                        <img src="${pageContext.request.contextPath}/resources/Assets/Images/avater.jpg" />
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--7-col text-left">
-                                        <h5><%= user.getFirstName() + " " + user.getLastName()%></h5>
-                                        <p><%= user.getEmail() %></p>
-                                    </div>
-                                </div>
-                                <div class="profile-dropdown-footer">
-                                    <button href="" class="text-link">profile</button>
-                                    <button href="" class="text-link">Logout</button>
-                                </div>
-                            </div>
-
-
-                        </a>
-                    </nav>
-                </div>
-            </header>
-            <div class="mdl-layout__drawer">
-                <span class="mdl-layout-title">Title</span>
-                <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="${pageContext.request.contextPath}/Views/Private/Booking.jsp""><i class="material-icons">assignment</i> Book cab</a>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">show_chart</i> Booking status</a>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">assignment</i> Settings</a>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">history</i> History</a>
-                    <hr>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">settings</i> Settings</a>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">feedback</i> Send feedback</a>
-                    <a class="mdl-navigation__link" href=""><i class="material-icons">help</i> Help</a>
-                </nav>
-            </div>
+            <%@include file="../../WEB-INF/private/Layout/postloginheader.jspf" %>
             <main class="mdl-layout__content">
                 <div class="page-content"><!-- Your content goes here -->
                     <section class="mdl-grid dashboard-section">

@@ -31,43 +31,7 @@
 </head>
 <body bgcolor="#f1f1f1">
 <div class="mdl-layout mdl-js-layout">
-  <header class="mdl-layout__header mdl-layout__header--scroll private-header">
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title">Title</span>
-      <!-- Add spacer, to align navigation to the right -->
-      <div class="mdl-layout-spacer"></div>
-      <!-- Navigation -->
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link account-group"><i class="material-icons">account_circle</i><span>User Firstname</span>
-
-          <div class="profile-dropdown">
-            <div class="top-cap"></div>
-            <div class="user-avatar-bg text-center">
-              <img src="../../Assets/Images/avater.jpg" />
-            </div>
-            <h5>Full Name</h5>
-            <p>email id</p>
-            <div class="profile-dropdown-footer">
-              <button href="" class="text-link">profile</button>
-              <button onclick="window.location.href='${pageContext.request.contextPath}/session/logout.do';" class="text-link">Logout</button>
-            </div>
-          </div>
-
-
-        </a>
-      </nav>
-    </div>
-  </header>
-  <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Title</span>
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-    </nav>
-  </div>
+  <%@include file="../../WEB-INF/private/Layout/postloginheader.jspf" %>
   <main class="mdl-layout__content">
     <div class="page-content"><!-- Your content goes here -->
       <section class="mdl-grid profile-info">
