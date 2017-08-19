@@ -71,7 +71,7 @@
                 outline: none;
             }
             #two{
-                top:-40% !important;
+                top:calc(50% - 210px) !important;
                 left:calc(50% - 170px) !important;
             }
             .pac-item{
@@ -117,7 +117,9 @@
                     <section class="mdl-grid booking-banner">
                         <div class="mdl-grid"> 
                             <div class="mdl-cell mdl-cell--12-col text-center stepper">
-                                <p class="step-name">Step one</p>
+                                <p class="active">Step one</p>
+                                <p>Step two</p>
+                                <p>Step three</p>
                                 <a class="active"></a> <a></a> <a></a>
                             </div>
                         </div>
@@ -133,15 +135,12 @@
                                     <div class="mdl-cell mdl-cell--4-col pad_rt">
                                         <h6 class="stepper-subheading">Select start location</h6>
                                         <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input placepicker" type="text" id="origin-input" placeholder="Pick location">
+                                            <input class="mdl-textfield__input placepicker" type="text" id="origin-input" placeholder="Pick location" onblur="calculateRoute();">
                                             <label class="mdl-textfield__label" for="pick-loc"></label>
                                         </div>
                                         <div id="collapseOne" class="collapse">
                                             <div class="placepicker-map thumbnail"></div>
                                         </div>
-
-                                        <a class="text-link " target="_blanck" href="ShowRoute.jsp">View route</a>
-
                                     </div>
                                     <div class="mdl-cell mdl-cell--1-col v_bar">
                                         <button class="mdl-button mdl-js-button mdl-button--fab" onclick="swapLocation();">
@@ -151,11 +150,11 @@
                                     <div class="mdl-cell mdl-cell--4-col pad_lt">
                                         <h6 class="stepper-subheading">Select drop location</h6>
                                         <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input placepicker" type="text" id="destination-input" placeholder="Pick location">
+                                            <input class="mdl-textfield__input placepicker" type="text" id="destination-input" placeholder="Pick location" onblur="calculateRoute();">
                                             <label class="mdl-textfield__label" for="destination-input"></label>
                                         </div>
 
-
+                                        <a class="text-link" target="_blanck" onclick="calculateRoute();showRoute()">View route</a>
                                     </div>
                                 </div>
 
@@ -166,7 +165,7 @@
                                     <div class="mdl-cell mdl-cell--2-col">
                                         <h6 class="stepper-subheading">Set journey date:</h6>
                                     </div>
-                                    <div class="mdl-cell mdl-cell--2-col">
+                                    <div class="mdl-cell mdl-cell--3-col">
                                         <span class="date" id="date">Not set</span>
                                         <button class="calendar-btn">
                                             <i class="material-icons" id="dt">today</i>
@@ -223,7 +222,7 @@
 
                                 <div class="mdl-grid">
                                     <div class="mdl-cell mdl-cell--12-col text-right">
-                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="goToNext(this);">
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="calculateRoute();goToNext(this);">
                                             next
                                         </button>
                                     </div>
@@ -232,10 +231,21 @@
                             <fieldset>
                                 <div class="mdl-grid">
                                     <div class="mdl-cell mdl-cell--3-col ">
-                                        <h6 class="stepper-heading">Filter</h6>
-                                        <div class="filter-tag">
+                                        <h6 class="stepper-heading filter-group">Filter
+                                            <div class="material-icons mdl-badge mdl-badge--overlap filter-badge fl-right" data-badge="3"><i
+                                                    class="material-icons">filter_list</i></div>
+                                            <div class="filter-tag-section">
+                                                <span>Filter</span>
+                                                <hr>
+                                                <div class="filter-tag-container">
+                                                    <div class="empty-msg text-center color-gray"><i class="material-icons">filter_list</i><p>You have no filter.Check the checkbox to get filter tags</p></div>
 
-                                        </div>
+                                                </div>
+                                                <a class="text-link fl-right" onclick="clearAllFilter()">CLEAR ALL</a>
+                                            </div>
+
+                                        </h6>
+
                                         <h6 class="stepper-subheading">Type</h6>
                                         <div class="filter-tag">
                                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
@@ -310,7 +320,7 @@
                                     <div class="mdl-cell mdl-cell--9-col">
                                         <h6 class="stepper-subheading">Select your car</h6>
                                         <div class="card-component-wrapper">
-                                            
+
                                         </div>
 
 
@@ -331,7 +341,7 @@
 
                                 <div class="mdl-grid">
                                     <div class="mdl-cell mdl-cell--12-col text-right">
-                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="goToPrev(this);">
                                             previous
                                         </button>
                                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="goToNext(this);">
@@ -342,69 +352,86 @@
                             </fieldset>
                             <fieldset>
                                 <div class="mdl-grid">
-                                    <div class="mdl-cell mdl-cell--6-col ">
-                                        <h6 class="stepper-heading">Booking summary</h6>
-                                        <div>
-                                            <h5>User Name</h5>
-                                            <p> +91 - 8583866670</p>
-                                            <br>
-                                            <p class="pay-heading">Pickup location</p>
-                                            <p>123 6th St. Melbourne, FL 32904</p>
-                                            <p class="pay-heading">Drop location</p>
-                                            <p>123 6th St. Melbourne, FL 32904</p>
-                                            <hr>
-                                            <p class="pay-heading">Distance <span class="pay-data">25 KM</span></p>
-                                            <p class="pay-heading">Estimated time <span class="pay-data">1 hr 12 min</span></p>
-                                            <div class="mdl-cell mdl-cell--6-col"><i class="material-icons">today</i> 12 Jul 2017</div>
-
-                                            <hr>
-                                            <p class="pay-heading">Base fare <span class="pay-data">25</span></p>
-                                            <p class="pay-heading">Distance fare <span class="pay-data">352</span></p>
-                                            <p class="pay-heading">Other charges <span class="pay-data">35</span></p>
-                                            <hr>
-                                            <h5>Subtotal <span class="pay-data">412</span></h5>
-                                        </div>
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--1-col v_bar">
-
-                                    </div>
-                                    <div class="mdl-cell mdl-cell--5-col pad_lt">
-                                        <h6 class="stepper-heading">Payment mode</h6>
-                                        <div class="payment-mode-section text-center">
-                                            <h1><i class="material-icons car-icon">directions_car</i></h1>
-                                            <h5>Please select your payment mode</h5>
-
-                                            <div>
-                                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                                                    <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
-                                                    <span class="mdl-radio__label">Credit/Debit</span>
-                                                </label>
-
-                                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                                                    <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
-                                                    <span class="mdl-radio__label">Net Banking</span>
-                                                </label>
-
-                                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                                                    <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
-                                                    <span class="mdl-radio__label">Cash</span>
-                                                </label>
-
+                                    <div class="mdl-cell mdl-cell--12-col ">
+                                        <h6 class="stepper-heading">Payment details</h6>
+                                        <div class="mdl-grid">
+                                            <div class="mdl-cell mdl-cell--12-col">
+                                                <p class="pay-heading">From</p>
+                                                <p class="pay-data-sm">123 6th St. Melbourne, FL 32904</p>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--12-col">
+                                                <p class="pay-heading">To</p>
+                                                <p class="pay-data-sm">44 Shirley Ave. West Chicago, IL 60185</p>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--12-col text-center">
+                                                <p class="pay-heading">Subtotal</p>
+                                                <h5><span class="pay-data-bg">412</span></h5>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--12-col text-center">
+                                                <button class="text-link detail-more"><span>Show detailed estimates</span> <i
+                                                        class="material-icons">expand_more</i></button>
+                                                <button class="text-link detail-less"><span>Hide detailed estimates</span> <i
+                                                        class="material-icons">expand_less</i></button>
                                             </div>
                                         </div>
-
+                                        <div class="mdl-grid detailed-bill-row">
+                                            <div class="mdl-cell mdl-cell--8-col">
+                                                <h4>Base fare</h4>
+                                                <p>Base fare varies in different states</p>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--4-col text-right">
+                                                <h4 class="color-gray"><span>Rs </span>40.00</h4>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--8-col">
+                                                <h4>Distance fare</h4>
+                                                <p>Cost estimate for total distance of <span class="distance"></span></p>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--4-col text-right">
+                                                <h4 class="color-gray"><span>Rs </span>1460.00</h4>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--8-col">
+                                                <h4>Cab charges</h4>
+                                                <p>Maruti Suzuki Swift Dezire</p>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--4-col text-right">
+                                                <h4 class="color-gray"><span>Rs </span>50.00</h4>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--8-col">
+                                                <h4>Other charges</h4>
+                                                <p>Total toll crossed</p>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--4-col text-right">
+                                                <h4 class="color-gray"><span>Rs </span>40.00</h4>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--8-col">
+                                                <h4>Promo applied</h4>
+                                                <p>No promo applied</p>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--4-col text-right">
+                                                <h4 class="color-gray">-<span>Rs </span>0.00</h4>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--12-col">
+                                                <hr>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--8-col">
+                                                <h4>Total ride estimates</h4>
+                                            </div>
+                                            <div class="mdl-cell mdl-cell--4-col text-right">
+                                                <h4 class="color-gray"><span>Rs </span>1590.00</h4>
+                                            </div>
+                                        </div>
                                     </div>
-
                                 </div>
 
-
-                                <div class="mdl-grid">
+                                <div class="mdl-grid booking-stepper-footer">
                                     <div class="mdl-cell mdl-cell--12-col text-right">
-                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                            previous
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                                                onclick="">
+                                            pay later
                                         </button>
-                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="goToNext(this);">
-                                            next
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+                                                onclick="openPaymentModal();">
+                                            pay now
                                         </button>
                                     </div>
                                 </div>
@@ -478,6 +505,16 @@
 
                     </footer>
                 </div>
+
+                <!--show route modal-->
+                <div class="dialog-wrapper route-modal">
+                    <div class="mdl-grid dialog-main">
+                        <div class="mdl-cell mdl-cell--12-col dialog-body">
+
+
+                        </div>
+                    </div>
+                </div>
             </main>
 
         </div>
@@ -497,123 +534,144 @@
         <script src="../../resources/Scripts/calendar.js"></script>
 
         <script>
-                                            var now = new Date();
-                                            var year = now.getFullYear();
-                                            var month = now.getMonth() + 1;
-                                            var date = now.getDate();
-                                            var data = [{
-                                                    date: year + '-' + month + '-' + (date - 1),
-                                                    value: 'hello'
-                                                }, {
-                                                    date: year + '-' + month + '-' + date,
-                                                    value: '上班'
-                                                }, {
-                                                    date: new Date(year, month - 1, date + 1),
-                                                    value: '吃饭睡觉打豆豆'
-                                                }, {
-                                                    date: '2016-10-31',
-                                                    value: '2016-10-31'
-                                                }];
-                                            // picker
-                                            $('#two').calendar({
-                                                trigger: '#dt',
-                                                width: 340,
-                                                height: 340,
-                                                next: '<i class="material-icons">keyboard_arrow_right</i>',
-                                                prev: '<i class="material-icons">keyboard_arrow_left</i>',
-                                                offset: [0, 1],
-                                                zIndex: 999,
-                                                format: 'dd/mm/yyyy',
-                                                weekArray: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-                                                data: data,
-                                                onSelected: function (view, date, data) {
-                                                    console.log('event: onSelected');
-                                                    date = moment(date).format("DD MMM YYYY")
-                                                    //alert('date:' + date);
-                                                    $('.date').text(date);
-                                                },
-                                                onClose: function (view, date, data) {
-                                                    console.log('event: onClose')
-                                                    console.log('view:' + view)
-                                                    console.log('date:' + date)
-                                                    console.log('data:' + (data || '无'));
-                                                }
-                                            });
-                                            $(document).ready(function () {
-
-                                                $.ajax({
-                                                    url: '${pageContext.request.contextPath}/Car.do',
-                                                    type: "GET",
-                                                    success: function (response) {
-                                                        populateList(response);
-                                                    },
-                                                    error: function (response, error) {
-                                                        alert(error);
-                                                    }
-                                                })
-
-
-                                                $(".placepicker").each(function () {
-
-                                                    // find map-element
-                                                    var target = this;
-                                                    var $collapse = $(this).parents('.form-group').next('.collapse');
-                                                    var $map = $collapse.find('.placepicker-map');
-
-                                                    // init placepicker
-                                                    var placepicker = $(this).placepicker({
-                                                        map: $map.get(0)
-                                                    }).data('placepicker');
-
-                                                    // reload map after collapse in
-                                                    $collapse.on('show.bs.collapse', function () {
-
-                                                        window.setTimeout(function () {
-                                                            if (!$(target).prop('value')) {
-                                                                placepicker.geoLocation();
-                                                            }
-                                                        }, 0);
+                                                    var now = new Date();
+                                                    var year = now.getFullYear();
+                                                    var month = now.getMonth() + 1;
+                                                    var date = now.getDate();
+                                                    var data = [{
+                                                            date: year + '-' + month + '-' + (date - 1),
+                                                            value: 'hello'
+                                                        }, {
+                                                            date: year + '-' + month + '-' + date,
+                                                            value: '上班'
+                                                        }, {
+                                                            date: new Date(year, month - 1, date + 1),
+                                                            value: '吃饭睡觉打豆豆'
+                                                        }, {
+                                                            date: '2016-10-31',
+                                                            value: '2016-10-31'
+                                                        }];
+                                                    // picker
+                                                    $('#two').calendar({
+                                                        trigger: '#dt',
+                                                        width: 340,
+                                                        height: 340,
+                                                        next: '<i class="material-icons">keyboard_arrow_right</i>',
+                                                        prev: '<i class="material-icons">keyboard_arrow_left</i>',
+                                                        offset: [0, 1],
+                                                        zIndex: 999,
+                                                        format: 'dd/mm/yyyy',
+                                                        weekArray: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+                                                        data: data,
+                                                        onSelected: function (view, date, data) {
+                                                            console.log('event: onSelected');
+                                                            date = moment(date).format("DD MMM YYYY")
+                                                            //alert('date:' + date);
+                                                            $('.date').text(date);
+                                                        },
+                                                        onClose: function (view, date, data) {
+                                                            console.log('event: onClose')
+                                                            console.log('view:' + view)
+                                                            console.log('date:' + date)
+                                                            console.log('data:' + (data || '无'));
+                                                        }
                                                     });
-                                                });
-                                            });
-                                            function populateList(cars) {
-                                                var card_wrapper = document.querySelector(".card-component-wrapper");
-                                                [].forEach.call(cars, function (_car) {
+                                                    $(document).ready(function () {
+
+                                                        $.ajax({
+                                                            url: '${pageContext.request.contextPath}/Car.do',
+                                                            type: "GET",
+                                                            success: function (response) {
+                                                                populateList(response);
+                                                            },
+                                                            error: function (response, error) {
+                                                                alert(error);
+                                                            }
+                                                        })
 
 
-                                                    var _mdl_card = document.createElement('div');
-                                                    _mdl_card.className = "demo-card-wide mdl-card mdl-shadow--2dp car-card";
+                                                        $(".placepicker").each(function () {
 
-                                                    var _mdl_card_text = document.createElement('div');
-                                                    _mdl_card_text.className = "mdl-card__title";
-                                                    var _img = document.createElement('img');
-                                                    _img.src = _car.carImageURI;
-                                                    _mdl_card_text.appendChild(_img);
-                                                    _mdl_card.appendChild(_mdl_card_text);
+                                                            // find map-element
+                                                            var target = this;
+                                                            var $collapse = $(this).parents('.form-group').next('.collapse');
+                                                            var $map = $collapse.find('.placepicker-map');
 
-                                                    var _mdl_card_inner = document.createElement('div');
-                                                    _mdl_card_inner.className = "mdl-card__supporting-text";
-                                                    var _heading = document.createElement('h6');
-                                                    _heading.className = "stepper-subheading";
-                                                    _heading.innerText = _car.carName;
-                                                    _mdl_card_inner.innerText = _car.carModel;
-                                                    _mdl_card_inner.prepend(_heading);
-                                                    _mdl_card.appendChild(_mdl_card_inner);
+                                                            // init placepicker
+                                                            var placepicker = $(this).placepicker({
+                                                                map: $map.get(0)
+                                                            }).data('placepicker');
 
-                                                    var _mdl_card_action = document.createElement('div');
-                                                    _mdl_card_action.className = "mdl-card__actions mdl-card--border";
-                                                    var _a = document.createElement('a');
-                                                    _a.className = "mdl-button  mdl-js-button mdl-js-ripple-effect";
-                                                    _a.innerText = "Select";
-                                                    _mdl_card_action.appendChild(_a);
-                                                    _mdl_card.appendChild(_mdl_card_action);
+                                                            // reload map after collapse in
+                                                            $collapse.on('show.bs.collapse', function () {
 
-
-                                                    card_wrapper.appendChild(_mdl_card);
-                                                });
-                                            }
+                                                                window.setTimeout(function () {
+                                                                    if (!$(target).prop('value')) {
+                                                                        placepicker.geoLocation();
+                                                                    }
+                                                                }, 0);
+                                                            });
+                                                        });
+                                                    });
+                                                    function populateList(cars) {
+                                                        var card_wrapper = document.querySelector(".card-component-wrapper");
+                                                        [].forEach.call(cars, function (_car) {
 
 
+                                                            var _mdl_card = document.createElement('div');
+                                                            _mdl_card.className = "demo-card-wide mdl-card mdl-shadow--2dp car-card";
+
+                                                            var _mdl_card_text = document.createElement('div');
+                                                            _mdl_card_text.className = "mdl-card__title";
+                                                            var _img = document.createElement('img');
+                                                            _img.src = _car.carImageURI;
+                                                            _mdl_card_text.appendChild(_img);
+                                                            _mdl_card.appendChild(_mdl_card_text);
+
+                                                            var _mdl_card_inner = document.createElement('div');
+                                                            _mdl_card_inner.className = "mdl-card__supporting-text";
+                                                            var _heading = document.createElement('h6');
+                                                            _heading.className = "stepper-subheading";
+                                                            _heading.innerText = _car.carName;
+                                                            _mdl_card_inner.innerText = _car.carModel;
+                                                            _mdl_card_inner.prepend(_heading);
+                                                            _mdl_card.appendChild(_mdl_card_inner);
+
+                                                            var _mdl_card_action = document.createElement('div');
+                                                            _mdl_card_action.className = "mdl-card__actions mdl-card--border";
+                                                            var _a = document.createElement('a');
+                                                            _a.className = "mdl-button  mdl-js-button mdl-js-ripple-effect";
+                                                            _a.innerText = "Select";
+                                                            _mdl_card_action.appendChild(_a);
+                                                            _mdl_card.appendChild(_mdl_card_action);
+
+
+                                                            card_wrapper.appendChild(_mdl_card);
+                                                        });
+                                                    }
+                                                    function calculateRoute() {
+                                                        var start = document.getElementById("origin-input").value;
+                                                        var end = document.getElementById("destination-input").value;
+
+                                                        if (start !== "" && end !== "") {
+                                                            var url = "${pageContext.request.contextPath}/Views/Private/DemoMapAPI.html?start=" + start + "&end=" + end;
+                                                            var _iframe = document.createElement('iframe');
+                                                            _iframe.id = "routePrimary";
+                                                            _iframe.src = url;
+                                                            _iframe.style.width = "100%";
+                                                            _iframe.style.height = "100%";
+
+                                                            document.getElementsByClassName("dialog-body")[0].appendChild(_iframe);
+                                                                var dist = $('#routePrimary').contents().find('#directions-panel');
+                                                                alert(dist.html());
+                                                         
+                                                            //var distance = dist.innerText.substring(dist.innerText.lastIndexOf(":") + 1, dist.innerText.length).trim();
+                                                            //$('.distance').text(distance);
+                                                        }
+                                                    }
+                                                    function showRoute() {
+                                                        $('.route-modal').fadeIn(300).slideDialogUp();
+                                                    }
         </script>
     </body>
 </html>

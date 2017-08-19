@@ -123,5 +123,6 @@
 
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+        <script src="../../resources/Scripts/basic-utility.js"></script>
     </body>
 </html>
