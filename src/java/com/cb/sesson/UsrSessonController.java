@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 public class UsrSessonController extends HttpServlet {
 
+    private static final String S_UNIQUE_EMAIL = "uniqueEmail";
     private static final String S_SIGNUP = "signup";
     private static final String S_SIGNIN = "login";
     private static final String S_SIGNOUT = "logout";
@@ -42,8 +43,15 @@ public class UsrSessonController extends HttpServlet {
             String fname, lname, addrs, email, contct, passwd, userid;
 
             String uri = request.getRequestURI();
+            
+            if (uri.contains(S_UNIQUE_EMAIL)) {
+                email = request.getParameter(EMAIL);
+                if (email != null && !email.equals("")) {
+                    out.print((!DAO.instance().isEmailExists(email)));
+                }
+            }
 
-            if (uri.contains(S_SIGNUP)) {
+            else if (uri.contains(S_SIGNUP)) {
                 fname = request.getParameter(FNAME);
                 if (fname != null && !fname.equals("")) {
                     lname = request.getParameter(LNAME);

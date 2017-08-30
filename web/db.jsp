@@ -12,8 +12,10 @@
 %>
 <h1>Successfully Connected...</h1>
 <%
+    } else {
+        throw new Exception("Database connection failed...");
     }
 %>
 <%=
-   ForgetPasswordController.Mailer.send("subhankar.kgp.16@gmail.com", "whiyyxhcpgpuufas", "subho.tukai@gmail.com", "Test", "<a href='http://www.google.com'><h1>Goto Google</h1></a>") ? "Message Sent Successfully!" : "" 
+   0//ForgetPasswordController.Mailer.send("subhankar.kgp.16@gmail.com", "whiyyxhcpgpuufas", "subho.tukai@gmail.com", "Test", "<a href='http://www.google.com'><h1>Goto Google</h1></a>") ? "Message Sent Successfully!" : "" 
 %>
